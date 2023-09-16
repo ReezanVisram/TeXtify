@@ -21,27 +21,7 @@ export default function RecordButton(props: {
         googleCloudRecognitionConfig: {
             encoding: 'LINEAR16',
             languageCode: 'en-US',
-        },
-        onStoppedSpeaking() {
-            axios
-                .post(
-                    'https://hack-the-north-2023-server-bbgxeko6ga-uc.a.run.app/transcription/translate',
-                    {
-                        raw_speech: results[0],
-                    },
-                    {
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                    }
-                )
-                .then((response) => {
-                    console.log(response)
-                })
-                .catch((error) => {
-                    console.log(error)
-                })
-        },
+        }
     })
     const [list, setList] = useState<string[]>([])
     const [processedResults, setProcessedResults] = useState<number[]>([])
