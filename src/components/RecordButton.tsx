@@ -57,7 +57,7 @@ export default function RecordButton() {
   };
 
   return (
-    <div className='relative w-1/2 h-1/2 bg-red-100'>
+    <div className='relative w-1/2 h-full bg-red-100'>
       <h1>Recording: {isRecording.toString()}</h1>
       <button onClick={isRecording ? stopSpeechToText : startSpeechToText}>
         {isRecording ? 'Stop Recording' : 'Start Recording'}

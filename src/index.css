@@ -11,3 +11,8 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+@font-face {
+  font-family: "computer-modern";
+  src: url(data:font/truetype;charset=utf-8;base64,T1R...gP5w/kP+RAA format("opentype");
+}
