@@ -1,7 +1,7 @@
-import React from "react";
+import React from 'react'
 
-import 'katex/dist/katex.min.css';
-import Latex from 'react-latex-next';
+import 'katex/dist/katex.min.css'
+import Latex from 'react-latex-next'
 
 export default function LaTeX(props: { latex: string }) {
     return (
@@ -10,5 +10,5 @@ export default function LaTeX(props: { latex: string }) {
                 <Latex>{props.latex}</Latex>
             </h3>
         </div>
-    );
+    )
 }

@@ -1,7 +1,7 @@
-import React from "react";
+import React from 'react'
 
-import RecordButton from "./RecordButton";
-import Document from "./Document";
+import RecordButton from './RecordButton'
+import Document from './Document'
 
 export default function Panel() {
     return (
@@ -9,5 +9,5 @@ export default function Panel() {
             <RecordButton />
             <Document />
         </div>
-    );
+    )
 }
