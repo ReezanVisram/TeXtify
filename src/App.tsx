@@ -9,21 +9,58 @@ function App() {
         title: 'TeXtify',
         sections: [
             {
+                index: 0,
                 subheading: 'Behold the quadratic formula:',
                 latex: ['$x = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}$'],
             },
         ],
     })
 
-    const appendLatex = (latex: string) => {
+    const addSection = () => {
         const newState = { ...state }
-        newState.sections[0].latex.push(latex)
+        newState.sections.push({
+            index: newState.sections.length,
+            subheading: '',
+            latex: [],
+        })
+        setState(newState)
+    }
+
+    const appendLatex = (latex: string, index: number) => {
+        const newState = { ...state }
+        newState.sections[index].latex.push(latex)
+        setState(newState)
+        console.log(state)
+    }
+
+    const updateTitle = (title: string) => {
+        const newState = { ...state }
+        newState.title = title
+        setState(newState)
+    }
+
+    const updateLatex = (latex: string, index: number, latexIndex: number) => {
+        const newState = { ...state }
+        newState.sections[index].latex[latexIndex] = latex
+        setState(newState)
+    }
+
+    const updateSubheading = (subheading: string, index: number) => {
+        const newState = { ...state }
+        newState.sections[index].subheading = subheading
         setState(newState)
     }
 
     return (
         <div>
-            <Panel state={state} appendLatex={appendLatex} />
+            <Panel
+                state={state}
+                appendLatex={appendLatex}
+                addSection={addSection}
+                updateTitle={updateTitle}
+                updateLatex={updateLatex}
+                updateSubheading={updateSubheading}
+            />
         </div>
     )
 }

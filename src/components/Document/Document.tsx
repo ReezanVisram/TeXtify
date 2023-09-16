@@ -13,7 +13,7 @@ export default function Document(props: { state: Document_t }) {
             {props.state.sections.map((section, index) => {
                 return (
                     <Section
-                        key={index}
+                        key={section.index}
                         latex={section.latex}
                         subheading={section.subheading}
                     />

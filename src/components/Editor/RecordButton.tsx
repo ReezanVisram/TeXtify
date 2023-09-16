@@ -5,7 +5,8 @@ import 'katex/dist/katex.min.css'
 import Latex from 'react-latex-next'
 
 export default function RecordButton(props: {
-    appendLatex: (latex: string) => void
+    index: number
+    appendLatex: (latex: string, index: number) => void
 }) {
     const {
         error,
@@ -44,7 +45,8 @@ export default function RecordButton(props: {
                         ...prevProcessed,
                         index,
                     ])
-                    props.appendLatex(latex)
+                    props.appendLatex(latex, props.index)
+                    console.log(props.index)
                 })
                 .catch((error) => {
                     console.log(error)
@@ -53,24 +55,18 @@ export default function RecordButton(props: {
     }
 
     return (
-        <div className="">
+        <div className="relative w-1/2 h-full bg-white flex flex-col justify-start items-start border-2 border-black">
             <h1>Recording: {isRecording.toString()}</h1>
             <button
+                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
                 onClick={isRecording ? stopSpeechToText : startSpeechToText}
             >
                 {isRecording ? 'Stop Recording' : 'Start Recording'}
             </button>
             <ul>
-                {list.map((listElement, index) => {
-                    return (
-                        <li key={index}>
-                            <Latex>{listElement}</Latex>
-                        </li>
-                    )
-                })}
                 {results.map((result, index) => {
                     handleResultProcessing(result as string, index)
-                    return <li key={index}></li>
+                    return <></>
                 })}
             </ul>
         </div>

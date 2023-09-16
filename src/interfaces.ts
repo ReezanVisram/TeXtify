@@ -1,4 +1,5 @@
 export interface Section_t {
+    index: number
     subheading: string
     latex: string[]
 }
