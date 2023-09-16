@@ -4,7 +4,9 @@ import useSpeechToText, { ResultType } from 'react-hook-speech-to-text'
 import 'katex/dist/katex.min.css'
 import Latex from 'react-latex-next'
 
-export default function RecordButton(props: { appendLatex: (latex: string) => void }) {
+export default function RecordButton(props: {
+    appendLatex: (latex: string) => void
+}) {
     const {
         error,
         interimResult,
