@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import useSpeechToText, { ResultType } from 'react-hook-speech-to-text';
+import 'katex/dist/katex.min.css';
+import Latex from 'react-latex-next';
 
 export default function RecordButton() {
   const {
@@ -18,12 +20,7 @@ export default function RecordButton() {
         encoding: 'LINEAR16',
         languageCode: 'en-US',
     },
-    onStoppedSpeaking: () => {
-      console.log(results);
-      while (results.length === 0) {
-          console.log('waiting');
-      }
-      console.log(results);
+    onStoppedSpeaking() {
       axios.post('https://hack-the-north-2023-server-bbgxeko6ga-uc.a.run.app/transcription/translate', {
               raw_speech: results[0],
           }, {
@@ -35,10 +32,29 @@ export default function RecordButton() {
           }).catch((error) => {
               console.log(error);
           });
-    }
+    },
   });
+  const [list, setList] = useState<string[]>([]);
+  const [processedResults, setProcessedResults] = useState<number[]>([]);
 
   if (error) return <p>Web Speech API is not available in this browser 🤷‍</p>;
+
+  const handleResultProcessing = (result: string, index: number) => {
+    if (!processedResults.includes(index)) {
+      axios
+        .post('https://hack-the-north-2023-server-bbgxeko6ga-uc.a.run.app/transcription/translate', {
+          raw_speech: result,
+        })
+        .then((response) => {
+          const latex = `$${response.data.latex}$`;
+          setList((prevList) => [...prevList, latex]);
+          setProcessedResults((prevProcessed) => [...prevProcessed, index]);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  };
 
   return (
     <div className='relative w-1/2 h-1/2 bg-red-100'>
@@ -47,7 +63,13 @@ export default function RecordButton() {
         {isRecording ? 'Stop Recording' : 'Start Recording'}
       </button>
       <ul>
-        {interimResult && <li>{interimResult}</li>}
+        {list.map((listElement, index) => {
+          return <li key={index}><Latex>{listElement}</Latex></li>;
+        })}
+        {results.map((result, index) => {
+          handleResultProcessing(result as string, index);
+          return <li key={index}></li>;
+        })}
       </ul>
     </div>
   );
