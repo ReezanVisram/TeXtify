@@ -4,7 +4,7 @@ import useSpeechToText, { ResultType } from 'react-hook-speech-to-text'
 import 'katex/dist/katex.min.css'
 import Latex from 'react-latex-next'
 
-export default function RecordButton() {
+export default function RecordButton(props: { appendLatex: (latex: string) => void }) {
     const {
         error,
         interimResult,
@@ -62,6 +62,7 @@ export default function RecordButton() {
                         ...prevProcessed,
                         index,
                     ])
+                    props.appendLatex(latex)
                 })
                 .catch((error) => {
                     console.log(error)
@@ -70,7 +71,7 @@ export default function RecordButton() {
     }
 
     return (
-        <div className="relative w-1/2 h-full bg-red-100">
+        <div className="relative w-1/2 h-full bg-white flex flex-col justify-start items-left border-r-2 border-black">
             <h1>Recording: {isRecording.toString()}</h1>
             <button
                 onClick={isRecording ? stopSpeechToText : startSpeechToText}

@@ -4,14 +4,21 @@ import Title from './Title'
 import SubHeading from './SubHeading'
 import Section from './Section'
 
-export default function Document() {
+import { Document_t } from '../interfaces'
+
+export default function Document(props: { state: Document_t }) {
     return (
         <div className="relative w-1/2 h-full bg-white flex flex-col justify-start items-left">
-            <Title title="Record" />
-            <Section
-                latex={['$x^2 + y^2 = z^2$', '$E=mc^2$']}
-                subheading="Record your voice and see the text appear on the screen."
-            />
+            <Title title={props.state.title} />
+            {props.state.sections.map((section, index) => {
+                return (
+                    <Section
+                        key={index}
+                        latex={section.latex}
+                        subheading={section.subheading}
+                    />
+                )
+            })}
         </div>
     )
 }
