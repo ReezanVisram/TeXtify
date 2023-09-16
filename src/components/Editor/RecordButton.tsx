@@ -21,7 +21,7 @@ export default function RecordButton(props: {
         googleCloudRecognitionConfig: {
             encoding: 'LINEAR16',
             languageCode: 'en-US',
-        }
+        },
     })
     const [list, setList] = useState<string[]>([])
     const [processedResults, setProcessedResults] = useState<number[]>([])
@@ -53,7 +53,7 @@ export default function RecordButton(props: {
     }
 
     return (
-        <div className="relative w-1/2 h-full bg-white flex flex-col justify-start items-left border-r-2 border-black">
+        <div className="">
             <h1>Recording: {isRecording.toString()}</h1>
             <button
                 onClick={isRecording ? stopSpeechToText : startSpeechToText}

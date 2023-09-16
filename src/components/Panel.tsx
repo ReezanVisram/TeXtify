@@ -1,7 +1,8 @@
 import React from 'react'
 
-import RecordButton from './RecordButton'
-import Document from './Document'
+import RecordButton from './Editor/RecordButton'
+import Document from './Document/Document'
+import Editor from './Editor/Editor'
 
 import { Document_t } from '../interfaces'
 
@@ -10,9 +11,11 @@ export default function Panel(props: {
     appendLatex: (latex: string) => void
 }) {
     return (
-        <div className="absolute w-full h-full bg-slate-900 justify-center items-center flex">
-            <RecordButton appendLatex={props.appendLatex} />
-            <Document state={props.state} />
+        <div className="w-screen h-screen justify-center items-center flex">
+            <Editor state={props.state} appendLatex={props.appendLatex} />
+            <div className="w-full h-full flex justify-center items-center">
+                <Document state={props.state} />
+            </div>
         </div>
     )
 }
