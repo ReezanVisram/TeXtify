@@ -33,6 +33,18 @@ function App() {
         console.log(state)
     }
 
+    const removeLatex = (sectionIndex: number, latexIndex: number) => {
+        const newState = { ...state }
+        newState.sections[sectionIndex].latex.splice(latexIndex, 1)
+        setState(newState)
+    }
+
+    const removeSection = (sectionIndex: number) => {
+        const newState = { ...state }
+        newState.sections.splice(sectionIndex, 1)
+        setState(newState)
+    }
+
     const updateTitle = (title: string) => {
         const newState = { ...state }
         newState.title = title
@@ -60,6 +72,8 @@ function App() {
                 updateTitle={updateTitle}
                 updateLatex={updateLatex}
                 updateSubheading={updateSubheading}
+                removeLatex={removeLatex}
+                removeSection={removeSection}
             />
         </div>
     )

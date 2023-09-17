@@ -7,7 +7,7 @@ export default function Title(props: {
     return (
         <input
             value={props.title}
-            className="text-4xl font-bold"
+            className="text-4xl h-12 font-bold text-center mb-2"
             placeholder="Title"
             type="text"
             onChange={(e) => props.updateTitle(e.target.value)}

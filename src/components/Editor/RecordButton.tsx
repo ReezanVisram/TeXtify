@@ -18,7 +18,7 @@ export default function RecordButton(props: {
     } = useSpeechToText({
         crossBrowser: true,
         useOnlyGoogleCloud: true,
-        googleApiKey: 'AIzaSyDVVYrU28BchOb75bO_3rcpzE3Y3pydBUY',
+        googleApiKey: process.env.REACT_APP_GCLOUD_API_KEY,
         googleCloudRecognitionConfig: {
             encoding: 'LINEAR16',
             languageCode: 'en-US',
@@ -55,8 +55,7 @@ export default function RecordButton(props: {
     }
 
     return (
-        <div className="relative w-1/2 h-full bg-white flex flex-col justify-start items-start border-2 border-black">
-            <h1>Recording: {isRecording.toString()}</h1>
+        <div className="flex justify-end mt-2">
             <button
                 className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
                 onClick={isRecording ? stopSpeechToText : startSpeechToText}

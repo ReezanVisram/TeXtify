@@ -13,6 +13,8 @@ export default function Panel(props: {
     updateTitle: (title: string) => void
     updateLatex: (latex: string, index: number, latexIndex: number) => void
     updateSubheading: (subheading: string, index: number) => void
+    removeLatex: (sectionIndex: number, latexIndex: number) => void
+    removeSection: (sectionIndex: number) => void
 }) {
     return (
         <div className="w-screen h-screen justify-center items-center flex">
@@ -23,6 +25,8 @@ export default function Panel(props: {
                 updateTitle={props.updateTitle}
                 updateLatex={props.updateLatex}
                 updateSubheading={props.updateSubheading}
+                removeLatex={props.removeLatex}
+                removeSection={props.removeSection}
             />
             <div className="w-full h-full flex justify-center items-center">
                 <Document state={props.state} />
